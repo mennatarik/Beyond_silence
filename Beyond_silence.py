@@ -1,35 +1,29 @@
 import streamlit as st
 import tempfile
 import torch
-import whisper
-from transformers import pipeline
+
 import pandas as pd
-
-# تحميل الموديلات مرة واحدة
-whisper_model = whisper.load_model("base")  # أو small/medium حسب ما تحبي
-classifier = pipeline(
-    "text-classification", 
-    model="path/to/your/fine_tuned_model",  # ← عدّلي المسار هنا
-    return_all_scores=False
-)
-
 st.set_page_config(page_title="Beyond Silence App", page_icon="🔊")
 st.title("🔊 Beyond Silence App")
 st.info("Transcribes speech to text and detects emotion.")
 
-# رفع ملف الصوت
+#Printing the output in the streamlit app
+# Upload audio file
 uploaded_file = st.file_uploader("Upload an audio file", type=["wav", "mp3", "m4a"])
 
 if uploaded_file is not None:
-    # حفظ الملف مؤقتًا
+    # Save uploaded file temporarily
     with tempfile.NamedTemporaryFile(delete=False) as tmp_file:
         tmp_file.write(uploaded_file.read())
         tmp_path = tmp_file.name
 
-    # تشغيل الصوت
+    # Play audio
     st.audio(uploaded_file, format='audio/wav')
 
-    # تحويل الكلام لنص
+    # Transcription with Whisper
+    import whisper
+    whisper_model = whisper.load_model("base")  # or "small", "medium", etc.
+
     st.write("Processing transcription...")
     result = whisper_model.transcribe(tmp_path)
     transcription = result["text"]
@@ -37,9 +31,9 @@ if uploaded_file is not None:
     st.subheader("📝 Transcription:")
     st.write(transcription)
 
-    # تحليل المشاعر
+    # Emotion detection using your fine-tuned model
     st.write("Detecting emotion...")
-    emotion_result = classifier(transcription)[0]
+    emotion_result = classifier(transcription)[0]  # classifier returns a list of dicts
     emotion_label = emotion_result['label']
     emotion_score = emotion_result['score']
 
