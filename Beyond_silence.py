@@ -21,6 +21,9 @@ if uploaded_file is not None:
     st.audio(uploaded_file, format='audio/wav')
 
     # Transcription with Whisper
+    import whisper
+    whisper_model = whisper.load_model("base")  # or "small", "medium", etc.
+
     st.write("Processing transcription...")
     result = whisper_model.transcribe(tmp_path)
     transcription = result["text"]
