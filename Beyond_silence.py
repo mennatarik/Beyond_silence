@@ -14,14 +14,31 @@ label_list = ['joy', 'sadness', 'anger', 'fear', 'love', 'surprise']
 # ===== Page Config =====
 st.set_page_config(page_title="Beyond Silence App", page_icon="🎙️", layout="centered")
 
+# ===== Dark Theme CSS =====
+st.markdown("""
+    <style>
+        body {
+            background-color: #121212;
+            color: #E0E0E0;
+        }
+        .stApp {
+            background-color: #121212;
+            color: #E0E0E0;
+        }
+        h1, h2, h3, p {
+            color: #E0E0E0;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
 # ===== Header =====
 st.markdown(
     """
-    <h1 style='text-align: center; color: #6C5B7B;'>🎙️ Beyond Silence</h1>
-    <p style='text-align: center; font-size: 18px; color: #555;'>
+    <h1 style='text-align: center; color: #BB86FC;'>🎙️ Beyond Silence</h1>
+    <p style='text-align: center; font-size: 18px; color: #B0B0B0;'>
     Transform speech into text & detect emotions instantly
     </p>
-    <hr>
+    <hr style='border-color: #333;'>
     """,
     unsafe_allow_html=True
 )
@@ -43,9 +60,9 @@ if uploaded_file is not None:
 
     st.markdown(
         f"""
-        <div style='background-color: #F8EDEB; padding: 15px; border-radius: 10px; border-left: 5px solid #E5989B;'>
-        <h3 style='color: #6C5B7B;'>📝 Transcription</h3>
-        <p style='font-size: 16px; color: #333;'>{transcription}</p>
+        <div style='background-color: #1E1E1E; padding: 15px; border-radius: 10px; border-left: 5px solid #BB86FC;'>
+        <h3 style='color: #BB86FC;'>📝 Transcription</h3>
+        <p style='font-size: 16px; color: #E0E0E0;'>{transcription}</p>
         </div>
         """,
         unsafe_allow_html=True
@@ -58,22 +75,22 @@ if uploaded_file is not None:
         emotion_label = label_list[emotion_id]
         emotion_score = emotion_result['score']
 
-    # Pastel Color Map
+    # Dark Color Map
     color_map = {
-        'joy': '#F9E79F',
-        'sadness': '#AED6F1',
-        'anger': '#F5B7B1',
-        'fear': '#D2B4DE',
-        'love': '#FADBD8',
-        'surprise': '#A9DFBF'
+        'joy': '#FFD369',
+        'sadness': '#4A90E2',
+        'anger': '#FF6B6B',
+        'fear': '#9B59B6',
+        'love': '#FF9FF3',
+        'surprise': '#2ECC71'
     }
-    color = color_map.get(emotion_label, '#D5DBDB')
+    color = color_map.get(emotion_label, '#B0BEC5')
 
     st.markdown(
         f"""
-        <div style='background-color: {color}; padding: 15px; border-radius: 10px; text-align: center;'>
-        <h2 style='color: #4A4A4A;'>😊 Detected Emotion: {emotion_label}</h2>
-        <p style='color: #4A4A4A; font-size: 18px;'>Confidence: {emotion_score:.2f}</p>
+        <div style='background-color: #1E1E1E; padding: 15px; border-radius: 10px; text-align: center; border: 2px solid {color};'>
+        <h2 style='color: {color};'>😊 Detected Emotion: {emotion_label}</h2>
+        <p style='color: #E0E0E0; font-size: 18px;'>Confidence: {emotion_score:.2f}</p>
         </div>
         """,
         unsafe_allow_html=True
