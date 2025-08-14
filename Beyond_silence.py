@@ -17,7 +17,7 @@ st.set_page_config(page_title="Beyond Silence App", page_icon="🎙️", layout=
 # ===== Header =====
 st.markdown(
     """
-    <h1 style='text-align: center; color: #4CAF50;'>🎙️ Beyond Silence</h1>
+    <h1 style='text-align: center; color: #6C5B7B;'>🎙️ Beyond Silence</h1>
     <p style='text-align: center; font-size: 18px; color: #555;'>
     Transform speech into text & detect emotions instantly
     </p>
@@ -34,7 +34,6 @@ if uploaded_file is not None:
         tmp_file.write(uploaded_file.read())
         tmp_path = tmp_file.name
 
-    # Audio player
     st.audio(uploaded_file, format='audio/wav')
 
     # ===== Transcription =====
@@ -44,8 +43,8 @@ if uploaded_file is not None:
 
     st.markdown(
         f"""
-        <div style='background-color: #f9f9f9; padding: 15px; border-radius: 10px; border-left: 5px solid #4CAF50;'>
-        <h3>📝 Transcription</h3>
+        <div style='background-color: #F8EDEB; padding: 15px; border-radius: 10px; border-left: 5px solid #E5989B;'>
+        <h3 style='color: #6C5B7B;'>📝 Transcription</h3>
         <p style='font-size: 16px; color: #333;'>{transcription}</p>
         </div>
         """,
@@ -59,22 +58,22 @@ if uploaded_file is not None:
         emotion_label = label_list[emotion_id]
         emotion_score = emotion_result['score']
 
-    # Styled output
+    # Pastel Color Map
     color_map = {
-        'joy': '#FFD700',
-        'sadness': '#1E90FF',
-        'anger': '#FF4500',
-        'fear': '#8B0000',
-        'love': '#FF69B4',
-        'surprise': '#9932CC'
+        'joy': '#F9E79F',
+        'sadness': '#AED6F1',
+        'anger': '#F5B7B1',
+        'fear': '#D2B4DE',
+        'love': '#FADBD8',
+        'surprise': '#A9DFBF'
     }
-    color = color_map.get(emotion_label, '#4CAF50')
+    color = color_map.get(emotion_label, '#D5DBDB')
 
     st.markdown(
         f"""
         <div style='background-color: {color}; padding: 15px; border-radius: 10px; text-align: center;'>
-        <h2 style='color: white;'>😊 Detected Emotion: {emotion_label}</h2>
-        <p style='color: white; font-size: 18px;'>Confidence: {emotion_score:.2f}</p>
+        <h2 style='color: #4A4A4A;'>😊 Detected Emotion: {emotion_label}</h2>
+        <p style='color: #4A4A4A; font-size: 18px;'>Confidence: {emotion_score:.2f}</p>
         </div>
         """,
         unsafe_allow_html=True
