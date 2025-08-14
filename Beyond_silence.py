@@ -1,6 +1,6 @@
-!pip install --upgrade pip
-!pip install git+https://github.com/openai/whisper.git
-!pip install setuptools-rust
+# !pip install --upgrade pip
+# !pip install git+https://github.com/openai/whisper.git
+# !pip install setuptools-rust
 
 # 3. Write your app
 
