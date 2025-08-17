@@ -7,7 +7,7 @@ import pandas as pd
 
 # ===== Load Models =====
 whisper_model = whisper.load_model("base")
-classifier = pipeline("text-classification", model="./my_trained_model", return_all_scores=False)
+classifier = pipeline("text-classification", model="mennatarik/my-emotion-model", return_all_scores=False)
 
 label_list = ['joy', 'sadness', 'anger', 'fear', 'love', 'surprise']
 
